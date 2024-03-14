@@ -19,7 +19,7 @@ This ASP .NET Core Web App (MVC) project is designed to provide online ordering 
 
 To run this application on your local machine, follow these steps:
 
-1. Clone the repo: `git clone https://github.com/https://github.com/ozdeeraslan/HamburgerAppMVC`
+1. Clone the repo: `git clone https://github.com/ozdeeraslan/HamburgerAppMVC`
 2. Navigate to the project directory: `cd HamburgerAppMVC`
 3. Open the project in Visual Studio or run it from the terminal: `dotnet run`
 
