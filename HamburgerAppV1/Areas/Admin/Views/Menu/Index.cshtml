@@ -1,0 +1,47 @@
+﻿@model IEnumerable<HamburgerAppV1.Entities.Menu>
+
+@{
+    ViewData["Title"] = "Menüler";
+}
+
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Yeni Menü Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Menü Adi
+            </th>
+            <th>
+                Menü Fiyati
+            </th>
+            <th>
+                Resim
+            </th>
+            <th>Islemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MenuAd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MenuFiyat) ₺
+                </td>
+                <td>
+                    <img src="~/img/@item.ResimYolu" height="64" />
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">Düzenle</a>
+                    @*                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                *@                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

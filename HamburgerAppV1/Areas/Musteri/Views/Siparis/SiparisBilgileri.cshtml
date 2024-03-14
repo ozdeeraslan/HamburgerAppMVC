@@ -1,0 +1,70 @@
+﻿@using HamburgerAppV1.Entities
+@model Siparis
+
+@{
+    ViewBag.Title = "Siparis Bilgileri";
+    ViewData["ToplamTutarFormat"] = "{0:₺0.00}";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<div class="row mb-5">
+    <div class="col-md-6">
+        <input asp-for="Id" type="hidden" value="" />
+        <div>
+            <strong>Menü:</strong>@Model.Menu?.MenuAd
+        </div>
+        <div>
+            <img src="~/img/@Model.Menu?.ResimYolu" alt="" height="250"/>
+        </div>
+    </div>
+    <div class="col-md-6 mt-4">
+        <div>
+            <strong>Ekstra Malzemeler:</strong>
+            <ul>
+                @foreach (var malzeme in Model.EkstraMalzemeler)
+                {
+                    <li>@malzeme.EktraMalzemeAd</li>
+                }
+            </ul>
+        </div>
+        <div class="mt-2">
+            <strong>Boyut:</strong> @Model.Boyut
+        </div>
+        <div class="mt-2">
+            <strong>Adet:</strong> @Model.Adet
+        </div>
+        <div class="mt-2">
+            <strong>Toplam Tutar:</strong> @(string.Format(ViewData["ToplamTutarFormat"].ToString(), Model.ToplamTutar))
+        </div>
+        <button type="button" class="btn btn-success mt-3 fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Siparişi Öde
+        </button>
+        <div class="mt-2">           
+            <a class="btn btn-danger fw-bold" asp-action="Delete" asp-controller="Siparis" asp-route-id="@Model.Id">Siparişi Sil</a>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<form asp-action="SiparisBilgileri" method="post">
+    <input type="hidden" asp-for="Id" value="" />
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ödeme Bilgisi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @(string.Format(ViewData["ToplamTutarFormat"].ToString(), Model.ToplamTutar)) fiyatlı siparişiniz ödenmiştir.
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" data-bs-dismiss="modal" class="btn btn-success">Tamam</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

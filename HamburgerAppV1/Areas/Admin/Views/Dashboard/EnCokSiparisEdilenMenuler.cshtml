@@ -1,0 +1,23 @@
+﻿@using HamburgerAppV1.Areas.Admin.Models
+@model DashboardViewModel
+
+<h2>En Çok Sipariş Edilen Menüler</h2>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Menu Ad</th>
+            <th>Sayısı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (EnCokSiparisEdilenMenuModel menu in Model.EnCokSiparisEdilenMenuler!)
+        {
+            <tr>
+                <td>@menu.MenuAdi</td>
+                <td>@menu.SiparisSayisi</td>
+            </tr>
+        }
+    </tbody>
+</table>

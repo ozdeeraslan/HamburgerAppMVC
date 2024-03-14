@@ -1,0 +1,35 @@
+﻿@model HamburgerAppV1.Entities.EkstraMalzeme
+
+@{
+    ViewData["Title"] = "Düzenle";
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="EktraMalzemeAd" class="control-label"></label>
+                <input asp-for="EktraMalzemeAd" class="form-control" />
+                <span asp-validation-for="EktraMalzemeAd" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="EktraMalzemeFiyat" class="control-label"></label>
+                <input asp-for="EktraMalzemeFiyat" class="form-control" />
+                <span asp-validation-for="EktraMalzemeFiyat" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+                <a class="btn btn-outline-primary" asp-action="Index">Listeye Geri Dön</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,35 @@
+﻿@model HamburgerAppV1.Entities.Menu
+
+@{
+    ViewData["Title"] = "Sil";
+}
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MenuAd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MenuAd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MenuFiyat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MenuFiyat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ResimYolu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ResimYolu)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Sil" class="btn btn-danger" /> 
+        <a class="btn btn-outline-primary" asp-action="Index">Listeye Geri Dön</a>
+    </form>
+</div>

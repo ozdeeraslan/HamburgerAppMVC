@@ -1,0 +1,22 @@
+﻿@using HamburgerAppV1.Areas.Admin.Models
+@model DashboardViewModel
+
+<h2>En Çok Kullanılan Ekstra Malzemeler</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Malzeme Adı</th>
+            <th>Kullanılma Sayısı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var malzeme in Model.EnCokKullanilanEkstraMalzemeler!)
+        {
+            <tr>
+                <td>@malzeme.MalzemeAdi</td>
+                <td>@malzeme.KullanilmaSayisi</td>
+            </tr>
+        }
+    </tbody>
+</table>

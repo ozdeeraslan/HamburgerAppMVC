@@ -1,0 +1,67 @@
+﻿@model HamburgerAppV1.Entities.Siparis
+
+@{
+    ViewData["Title"] = "Sil";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Menü
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Menu.MenuAd
+        </dd>
+        <dt class="col-sm-2">
+            Menü Boyutu
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Boyut)
+        </dd>
+        <dt class="col-sm-2">
+            Ekstra Malzemeler
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var ekstraMalzemelerString = string.Join(", ", Model.EkstraMalzemeler.Select(e => e.EktraMalzemeAd));
+            }
+            @Html.DisplayFor(modelItem => ekstraMalzemelerString)
+        </dd>
+        <dt class="col-sm-2">
+            Adet
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Adet)
+        </dd>
+        <dt class="col-sm-2">
+            Toplam Tutar
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ToplamTutar) ₺
+        </dd>
+        <dt class="col-sm-2">
+            Siparis Tarihi
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var formattedDate = Model.SiparisTarihi.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"));
+            }
+            @formattedDate
+        </dd>
+        @* <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kullanici)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kullanici.Id)
+        </dd> *@
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Sil" class="btn btn-danger" /> 
+        <a class="btn btn-outline-warning" asp-action="Index">Listeye Geri Dön</a>
+    </form>
+</div>

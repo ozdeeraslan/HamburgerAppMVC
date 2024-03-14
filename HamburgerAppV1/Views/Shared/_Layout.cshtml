@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using HamburgerAppV1.Data
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hamburgerci</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color: rgb(179, 163, 152)">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand fs-3 fw-bold" style="color: rgb(255, 217, 102)" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/logo.png" width="100px" alt="" />
+                    Hamburgerci
+                </a>
+
+                <a class="navbar-brand fs-5 fw-bold" style="color: rgb(255, 217, 102)" asp-area="" asp-controller="Home" asp-action="Hakkimizda">
+                    Hakkımızda
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav">
+                    </ul>
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        if (User.IsInRole("Administrator"))
+                        {
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item me-2">
+                                    <a class="nav-link btn btn-outline-light rounded-2 fw-bold" style="color: rgb(255, 217, 102)" asp-area="Admin"
+                                       asp-action="Index" asp-controller="Dashboard">Yönetici Paneli</a>
+                                </li>
+                            </ul>
+
+                        }
+                        else
+                        {
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item me-2">
+                                    <a class="nav-link rounded-2 fw-bold btn btn-outline-light" style="color:rgb(255, 217, 102)"
+                                       asp-action="MenuleriIncele" asp-controller="Siparis" asp-area="Musteri">Sipariş Verin</a>
+                                </li>
+                                <li class="nav-item me-2">
+                                    <a class="nav-link rounded-2 fw-bold btn btn-outline-light" style="color:rgb(255, 217, 102)"
+                                       asp-action="Index" asp-controller="Siparis" asp-area="Musteri">Siparişlerim</a>
+                                </li>
+                            </ul>
+                        }
+
+                        <partial name="_LoginPartial" />
+                    }
+                    else
+                    {
+                        <partial name="_LoginPartial" />
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid mb-auto">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @* <footer class="border-top footer text-muted">
+    <div class="container">
+    Copyright &copy; Hamburgerci 2024
+    </div>
+    </footer> *@
+    <footer class="footer py-5 mt-auto">
+
+        <div class="container"><p class="m-0 text-center" style="color: rgb(255, 217, 102)"><b>Copyright &copy; Hamburgerci 2024</b></p></div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

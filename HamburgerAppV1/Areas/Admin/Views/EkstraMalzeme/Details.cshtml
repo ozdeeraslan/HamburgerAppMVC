@@ -1,0 +1,28 @@
+﻿@model HamburgerAppV1.Entities.EkstraMalzeme
+
+@{
+    ViewData["Title"] = "Detaylar";
+}
+
+<div>
+    <h4>EkstraMalzeme</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EktraMalzemeAd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EktraMalzemeAd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EktraMalzemeFiyat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EktraMalzemeFiyat)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Düzenle</a> 
+    <a class="btn btn-outline-primary" asp-action="Index">Listeye Geri Dön</a>
+</div>

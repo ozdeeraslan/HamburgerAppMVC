@@ -1,0 +1,40 @@
+﻿@model IEnumerable<HamburgerAppV1.Entities.EkstraMalzeme>
+
+@{
+    ViewData["Title"] = "Ekstra Malzemeler";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Yeni Malzeme Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Malzeme Adi
+            </th>
+            <th>
+                Malzeme Fiyati
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EktraMalzemeAd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EktraMalzemeFiyat) ₺
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">Düzenle</a>
+                    @* <a asp-action="Details" asp-route-id="@item.Id">Details</a> *@
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

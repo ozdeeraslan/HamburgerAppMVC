@@ -1,0 +1,78 @@
+﻿@model IEnumerable<HamburgerAppV1.Entities.Siparis>
+
+@{
+    ViewData["Title"] = "Siparislerim";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Yeni</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Menu
+            </th>
+            <th>
+                Boyut
+            </th>
+            <th>
+                Adet
+            </th>
+            <th>
+                Ekstra Malzemeler
+            </th>
+            <th>
+                Toplam Tutar
+            </th>
+            <th>
+                Siparis Tarihi
+            </th>
+            <th>
+                Resim
+            </th> 
+            <th>
+                Detay
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Menu.MenuAd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Boyut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adet)
+                </td>
+                <td>
+                    @{
+                        var ekstraMalzemelerString = string.Join(", ", item.EkstraMalzemeler.Select(e => e.EktraMalzemeAd));
+                    }
+                    @Html.DisplayFor(modelItem => ekstraMalzemelerString)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToplamTutar) ₺
+                </td>
+                <td>
+                    @{
+                        var formattedDate = item.SiparisTarihi.ToString("dd MMMM yyyy HH:mm", new System.Globalization.CultureInfo("tr-TR"));
+                    }
+                    @formattedDate
+                </td>
+                <td>
+                    <img src="~/img/@item.Menu.ResimYolu" height="64" />
+                </td>                
+                <td>
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Detay</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

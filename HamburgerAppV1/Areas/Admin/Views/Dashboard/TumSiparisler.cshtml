@@ -1,0 +1,50 @@
+﻿@using HamburgerAppV1.Entities
+@model List<Siparis>
+
+<h2>Tüm Siparişler</h2>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Kullanıcı Adı</th>
+            <th>Menü</th>
+            <th>Ekstra Malzemeler</th>
+            <th>Siparis Tarihi</th>
+            <th>Toplam Tutar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var siparis in Model)
+        {
+            <tr>
+                <td>@siparis.Kullanici.UserName</td>
+                <td>@siparis.Menu.MenuAd</td>
+                <td>
+                    @foreach (var ekstraMalzeme in siparis.EkstraMalzemeler)
+                    {
+                        @ekstraMalzeme.EktraMalzemeAd
+                        @if (!ekstraMalzeme.Equals(siparis.EkstraMalzemeler.Last()))
+                        {
+                            <text>,</text>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        var formattedDate = @siparis.SiparisTarihi.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"));
+                    }
+                    @formattedDate
+                </td>
+                <td>@siparis.ToplamTutar ₺</td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td colspan="5" class="text-right fw-bold">Toplam Ciro: @Model.Sum(x => x.ToplamTutar) ₺</td>
+        </tr>
+    </tbody>
+</table>
